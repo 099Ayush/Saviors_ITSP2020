@@ -37,7 +37,8 @@ input[type='text'] {
 }
 
 input[type='text']:focus {
-    border: #000 2px solid;
+    color: #000;
+    border: #0000 2px solid;
     background: #fff;
 }
 
