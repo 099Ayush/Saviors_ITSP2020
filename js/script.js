@@ -26,11 +26,11 @@ $(document).ready(function () {
     }
     update_form_1();
     update_output();
-    $('form div input[type=\'range\']').on('input', function () {
+    $('input[type=\'range\']').on('input', function () {
         update_form_1();
         update_output();
     });
-    $('form div input[type=\'text\']').on('input', function () {
+    $('input[type=\'text\']').on('input', function () {
         update_form_2();
         update_output();
     });

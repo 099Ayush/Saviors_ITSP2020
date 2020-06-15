@@ -5,28 +5,30 @@
     text-align: center;
 }
 
+:root {
+    background: linear-gradient(to bottom, #000c, #000d), url('../img/download.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
 form {
     margin: 10vw auto;
     width: 70%;
-    border: solid 2px #000;
-    background-color: #8a2be233;
+    border: solid 2px #888;
+    padding: 0 10%;
     padding-bottom: 20px;
 }
 
 form * {
     font-size: large;
-    vertical-align: middle;
 }
 
-form div {
-    display: flex;
-    width: 90%;
-    margin: 10px auto;
-    justify-content: space-between;
-}
-
-form div input[type='text'] {
+input[type='text'] {
     width: 50px;
+    color: white;
     border: #888 1px solid;
     text-align: center;
     background: #0000;
@@ -34,7 +36,7 @@ form div input[type='text'] {
     outline: none;
 }
 
-form div input[type='text']:focus {
+input[type='text']:focus {
     border: #000 2px solid;
     background: #fff;
 }
@@ -43,9 +45,10 @@ input[type='range'] {
     appearance: none;
     -webkit-appearance: none;
     height: 15px;
-    background: #2b4ce233;
+    background: #fff3;
     border-radius: 20px;
     outline: none;
+    width: 100%;
     transition: 0.2s;
 }
 
@@ -55,39 +58,33 @@ input[type='range']::-webkit-slider-thumb {
     width: 15px;
     height: 15px;
     border-radius: 50%; 
-    background: #2b4ce2;
+    background: #fff;
     cursor: pointer;
   }
 
 #output {
-    margin: 10px auto;
     padding: 10px;
     color: white;
-    background-color: #8a2be2;
-    border-radius: 50%;
 }
 
 #heading {
     color: white;
-    background-color: #8a2be2;
     margin-top: 0px;
     padding: 10px;
     font-weight: normal;
 }
 
+td {
+    vertical-align: middle;
+}
+
 @media only screen and (max-width: 790px) {
     form {
         width: 100%;
-    }
-    input, label {
-        display: block;
-        margin: 0 auto;
-        width: 100%;
+        padding: 0;
+        border: none;
     }
     .ranges {
         display: none;
-    }
-    #output {
-        width: 20%;
     }
 }
