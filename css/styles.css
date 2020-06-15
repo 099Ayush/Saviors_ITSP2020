@@ -49,6 +49,16 @@ input[type='range'] {
     transition: 0.2s;
 }
 
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%; 
+    background: #2b4ce2;
+    cursor: pointer;
+  }
+
 #output {
     margin: 10px auto;
     padding: 10px;
@@ -69,7 +79,6 @@ input[type='range'] {
     form {
         width: 100%;
     }
-
     input, label {
         display: block;
         margin: 0 auto;
