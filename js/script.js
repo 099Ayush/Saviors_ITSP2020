@@ -53,9 +53,5 @@ model1 = new Model(10);
  * Updates the output everytime the form is updated.
  */
 function update_output() {
-    var sum = 0;
-    $('input').each(function () {
-        sum += parseFloat($(this).val());
-    });
-    $('#output').html(sum);
+    // pass
 }
