@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+* {
+    font-family: Nunito, sans-serif;
+    text-align: center;
+}
+
+form {
+    margin-left: 15%;
+    margin-top: 10vw;
+    width: 70%;
+    border: solid 2px #000;
+    background-color: #8a2be233;
+    padding-bottom: 20px;
+}
+
+form * {
+    font-size: large;
+    vertical-align: middle;
+}
+
+form div {
+    display: flex;
+    width: 90%;
+    margin: 10px auto;
+    justify-content: space-between;
+}
+
+form div input[type='text'] {
+    width: 50px;
+    border: #888 1px solid;
+    text-align: center;
+    background: #0000;
+    transition: 0.3s;
+    outline: none;
+}
+
+form div input[type='text']:focus {
+    border: #000 2px solid;
+    background: #fff;
+}
+
+input[type='range'] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 15px;
+    background: #2b4ce233;
+    border-radius: 20px;
+    outline: none;
+    transition: 0.2s;
+}
+
+#output {
+    margin: 10px auto;
+    padding: 10px;
+    color: white;
+    background-color: #8a2be2;
+    border-radius: 50%;
+}
+
+#heading {
+    color: white;
+    background-color: #8a2be2;
+    margin-top: 0px;
+    padding: 10px;
+    font-weight: normal;
+}
