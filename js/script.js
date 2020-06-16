@@ -10,30 +10,40 @@ w   :   Width of car A.
 D   :   Distance between car A and car C.
 */
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Snippet to update text fields by sliders, and vice versa.
 $(document).ready(function () {
     function update_form_1() {
         $('#vA').val($('#vAs').val());
         $('#vB').val($('#vBs').val());
+        $('#vC').val($('#vCs').val());
         $('#D').val($('#Ds').val());
         $('#s').val($('#ss').val());
     }
     function update_form_2() {
         $('#vAs').val($('#vA').val());
         $('#vBs').val($('#vB').val());
+        $('#vCs').val($('#vC').val());
         $('#Ds').val($('#D').val());
         $('#ss').val($('#s').val());
     }
     update_form_1();
-    update_output();
     $('input[type=\'range\']').on('input', function () {
         update_form_1();
-        update_output();
     });
     $('input[type=\'text\']').on('input', function () {
         update_form_2();
-        update_output();
     });
+    $('form').addClass('visible1');
+    setTimeout(function() {
+        $('form').addClass('visible2');
+    }, 600);
+    setTimeout(function() {
+        $('form table').css('opacity', '1');
+    }, 1000);
 });
 
 /**
@@ -47,11 +57,3 @@ function Model(s) {
     return model;
 }
 
-model1 = new Model(10);
-
-/**
- * Updates the output everytime the form is updated.
- */
-function update_output() {
-    // pass
-}

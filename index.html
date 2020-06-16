@@ -9,35 +9,75 @@
 </head>
 
 <body>
-    <form>
-        <table style="width: 100%;">
-            <tr><td colspan="5"><h2 id="heading">Enter initial measurements</h2></td></tr>
-            <tr>
-                <td style="text-align: left;"><label>Speed of car A (km/h)</label></td>
-                <td><input id="vA" type="text"></td>
-                <td style="text-align: right;" class='ranges'>10</td><td><input id="vAs" type="range" min="10" max="120" value="50"></td><td style="text-align:left" class='ranges'>120</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;"><label for="vB">Speed of car B (km/h)</label></td>
-                <td><input id="vB" type="text"></td>
-                <td style="text-align: right;" class='ranges'>10</td><td><input id="vBs" type="range" min="10" max="120" value="50"></td><td style="text-align:left" class='ranges'>120</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;"><label for="D">Distance b/w cars A and C</label></td>
-                <td><input id="D" type="text"> </td>
-                <td style="text-align: right;" class='ranges'>100</td><td><input id="Ds" type="range" min="100" max="500" value="200"></td><td style="text-align:left" class='ranges'>500</td>
-            </tr>
-            <tr>
-                <td style="text-align: left;"><label for="s">Safe distance b/w vehicles</label></td>
-                <td><input id="s" type="text"> </td>
-                <td style="text-align: right;" class='ranges'>1</td><td><input id="ss" type="range" min="1" max="15" value="5"></td><td style="text-align:left" class='ranges'>15</td>
-            </tr>
-            <tr><td style="user-select: none;">&ThinSpace;</td></tr>
-            <tr>
-                <td colspan="5"><input type="submit" value="Play"></td>
-            </tr>
-        </table>
-    </form>
+    <div class="main">
+        <div class="wrapper">
+            <form>
+                <table style="width: 100%;">
+                    <tr>
+                        <td colspan="5">
+                            <h2 id="heading">Enter initial measurements</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label>Width of car A</label></td>
+                        <td><input id="wA" type="text" value="1.5"></td>
+                        <td style="text-align: left;">m</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label>Width of car B</label></td>
+                        <td><input id="wB" type="text" value="1.5"></td>
+                        <td style="text-align: left;">m</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label>Speed of car A</label></td>
+                        <td><input id="vA" type="text"></td>
+                        <td style="text-align: left;">kmph</td>
+                        <td style="text-align: right;" class='ranges'>10</td>
+                        <td><input id="vAs" type="range" min="10" max="120" value="50"></td>
+                        <td style="text-align:left" class='ranges'>120</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label for="vB">Speed of car B</label></td>
+                        <td><input id="vB" type="text"></td>
+                        <td style="text-align: left;">kmph</td>
+                        <td style="text-align: right;" class='ranges'>10</td>
+                        <td><input id="vBs" type="range" min="10" max="120" value="50"></td>
+                        <td style="text-align:left" class='ranges'>120</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label for="vC">Speed of car C</label></td>
+                        <td><input id="vC" type="text"></td>
+                        <td style="text-align: left;">kmph</td>
+                        <td style="text-align: right;" class='ranges'>10</td>
+                        <td><input id="vCs" type="range" min="10" max="120" value="50"></td>
+                        <td style="text-align:left" class='ranges'>120</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label for="D">Distance b/w cars A and C</label></td>
+                        <td><input id="D" type="text"></td>
+                        <td style="text-align: left;">m</td>
+                        <td style="text-align: right;" class='ranges'>100</td>
+                        <td><input id="Ds" type="range" min="100" max="500" value="200"></td>
+                        <td style="text-align:left" class='ranges'>500</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left;"><label for="s">Distance b/w cars A and B</label></td>
+                        <td><input id="s" type="text"></td>
+                        <td style="text-align: left;">m</td>
+                        <td style="text-align: right;" class='ranges'>1</td>
+                        <td><input id="ss" type="range" min="1" max="10" value="5"></td>
+                        <td style="text-align:left" class='ranges'>10</td>
+                    </tr>
+                    <tr>
+                        <td style="user-select: none;">&ThinSpace;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5"><input type="button" value="Play"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="js/script.js"></script>
 </body>

@@ -1,16 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito');
 * {
     font-family: Nunito, sans-serif;
     text-align: center;
 }
 
 :root {
-    background: linear-gradient(to bottom, #000c, #000d), url('../img/download.jpg');
+    background: linear-gradient(to bottom, #001c, #001d), url('../img/download.jpg');
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    overflow: hidden;
+}
+
+html, body {
+    height: 100%;
+}
+.main {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+.wrapper {
+    display: table-cell;
+    height: 100%;
+    vertical-align: middle;
 }
 
 *::selection {
@@ -19,11 +34,33 @@
 }
 
 form {
+    opacity: 1;
     margin: 10vw auto;
+    width: 0;
+    height: 0;
+    border: solid 1.5px #fff;
+    border-radius: 8px;
+    border-left: none;
+    border-right: none;
+    padding-bottom: 0px;
+    overflow: hidden;
+    transition: 0.3s;
+    padding-bottom: 10px;
+}
+
+table {
+    transition: 0.5s;
+    opacity: 0;
+}
+
+form.visible1 {
     width: 70%;
-    border: solid 2px #888;
     padding: 0 10%;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+form.visible2 {
+    height: 390.2px;
 }
 
 form * {
@@ -76,22 +113,22 @@ input[type='range']::-webkit-slider-thumb {
     transition: 0.2s;
 }
 
-input[type='range']::-webkit-slider-thumb:hover {
+input[type='range']::-webkit-slider-thumb:active {
     transform: scale(1.5);
 }
 
-input[type='submit'] {
+input[type='button'] {
     background-color: #0000;
     border: 1px solid white;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 40px;
     outline: none;
     transition: 0.2s;
     border-radius: 30px;
     cursor: pointer;
 }
 
-input[type='submit']:hover {
+input[type='button']:hover {
     color: #000;
     background-color: #fff;
     transform: scale(1.2);
@@ -114,10 +151,13 @@ td {
 }
 
 @media only screen and (max-width: 790px) {
-    form {
+    form.visible1 {
         width: 100%;
-        padding: 0;
-        border: none;
+        padding: 0 0;
+        padding-bottom: 10px;
+    }
+    form.visible2 {
+        padding-bottom: 30px;
     }
     .ranges {
         display: none;
