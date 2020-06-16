@@ -37,13 +37,19 @@ $(document).ready(function () {
     $('input[type=\'text\']').on('input', function () {
         update_form_2();
     });
-    $('form').addClass('visible1');
+    setTimeout(function() {
+        $('form').addClass('visible1');
+    }, 100);
     setTimeout(function() {
         $('form').addClass('visible2');
-    }, 600);
+    }, 700);
     setTimeout(function() {
         $('form table').css('opacity', '1');
-    }, 1000);
+    }, 1100);
+
+    $('input[type=\'button\']').click(function () {
+        $('input:not([type=\'button\'])').prop('disabled', 'true');
+    });
 });
 
 /**
@@ -56,4 +62,3 @@ function Model(s) {
     model.s = s;
     return model;
 }
-

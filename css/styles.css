@@ -36,16 +36,17 @@ html, body {
 form {
     opacity: 1;
     margin: 10vw auto;
-    width: 0;
+    width: 20px;
     height: 0;
-    border: solid 1.5px #fff;
-    border-radius: 8px;
+    border: solid 2px #fff;
+    border-radius: 20px;
     border-left: none;
     border-right: none;
     padding-bottom: 0px;
     overflow: hidden;
     transition: 0.3s;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
+    background-color: #8882;
 }
 
 table {
@@ -54,9 +55,9 @@ table {
 }
 
 form.visible1 {
-    width: 70%;
+    width: 60%;
     padding: 0 10%;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 form.visible2 {
@@ -87,7 +88,7 @@ input[type='text']:focus {
     color: #000;
     background: #fff;
     border-color: white;
-    transform: scale(1.5);
+    transform: scale(1.3);
 }
 
 input[type='range'] {
@@ -113,13 +114,17 @@ input[type='range']::-webkit-slider-thumb {
     transition: 0.2s;
 }
 
+input[type='range'][disabled]::-webkit-slider-thumb {
+    cursor: default;
+}
+
 input[type='range']::-webkit-slider-thumb:active {
     transform: scale(1.5);
 }
 
 input[type='button'] {
     background-color: #0000;
-    border: 1px solid white;
+    border: 2px solid white;
     color: #fff;
     padding: 10px 40px;
     outline: none;
@@ -128,10 +133,10 @@ input[type='button'] {
     cursor: pointer;
 }
 
-input[type='button']:hover {
+input[type='button']:active {
     color: #000;
     background-color: #fff;
-    transform: scale(1.2);
+    transform: scale(1.1);
 }
 
 #output {
@@ -141,6 +146,7 @@ input[type='button']:hover {
 
 #heading {
     color: white;
+    font-size: larger;
     margin-top: 0px;
     padding: 10px;
     font-weight: normal;
@@ -150,16 +156,24 @@ td {
     vertical-align: middle;
 }
 
-@media only screen and (max-width: 790px) {
+@media only screen and (max-width: 1000px) {
     form.visible1 {
         width: 100%;
         padding: 0 0;
-        padding-bottom: 10px;
+        padding-bottom: 20px;
     }
     form.visible2 {
         padding-bottom: 30px;
     }
     .ranges {
         display: none;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    input[type='button']:hover {
+        color: #000;
+        background-color: #fff;
+        transform: scale(1.1);
     }
 }
