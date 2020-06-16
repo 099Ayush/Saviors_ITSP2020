@@ -131,6 +131,7 @@ input[type='button'] {
     transition: 0.2s;
     border-radius: 30px;
     cursor: pointer;
+    -webkit-touch-callout: none;
 }
 
 input[type='button']:active {
