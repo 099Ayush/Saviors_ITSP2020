@@ -132,6 +132,7 @@ input[type='button'] {
     border-radius: 30px;
     cursor: pointer;
     -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 input[type='button']:active {
