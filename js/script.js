@@ -44,9 +44,10 @@ function predict_accn2(speed) {
 
 var v_a, v_b, v_c, w, D, s, lA, xA, xB, xC;
 var a;                       // Acceleration of car B.
-var fr = 120                 // Frame rate (fps).
-var sd2 = 25                 // Safe distance after overtake (m).
-var lB = 5                   // Length of car B (m).
+var fr = 120;
+var sd1 = 5;                 // Frame rate (fps).
+var sd2 = 25;                 // Safe distance after overtake (m).
+var lB = 5;                   // Length of car B (m).
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -112,10 +113,10 @@ $(document).ready(function () {
     function update_form(fD, fs, fv_b) {
         $('#Ds').val(fD);
         $('#ss').val(fs);
-        $('#vAs').val(fv_b * 18 / 5);
+        $('#vBs').val(fv_b * 18 / 5);
         $('#D').val(parseInt(fD));
         $('#s').val(parseInt(fs));
-        $('#vA').val(parseInt(fv_b * 18 / 5));
+        $('#vB').val(parseInt(fv_b * 18 / 5));
     }
 
     /**
@@ -124,8 +125,8 @@ $(document).ready(function () {
     async function play() {
         while (true) {
             let duration = 1 / fr;
-            xA += duration * (2 * v_a + a * duration) / 2;
-            xB += duration * v_b;
+            xB += duration * (2 * v_b + a * duration) / 2;
+            xA += duration * v_a;
             xC += duration * v_c;
 
             v_b += a * duration;
@@ -137,7 +138,7 @@ $(document).ready(function () {
 
             if (xB >= xA) a = predict_accn2(v_a);
 
-            if (xB >= xC) {
+            if (xB + sd2 >= xC) {
                 $('form').css('background', '#f004');
                 $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
                 $('input[type=\'button\']').click(function () {
@@ -146,7 +147,7 @@ $(document).ready(function () {
                 return;
             }
 
-            if (xA + lB + sd2 <= xB) {
+            if (xA + lB + sd1 <= xB) {
                 $('form').css('background', '#0f04');
                 $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
                 $('input[type=\'button\']').click(function () {
@@ -155,7 +156,7 @@ $(document).ready(function () {
                 return;
             }
 
-            update_form(D, s, v_a);
+            update_form(D, s, v_b);
             await sleep(duration * 1000);
         }
     }
