@@ -89,7 +89,7 @@ $(document).ready(function () {
 
     // On submit, disable inputs and store initial measurements.
     $('input[type=\'button\']').click(function () {
-        $('input:not([type=\'button\'])').prop('disabled', 'true');
+        $('input').prop('disabled', 'true').css('cursor', 'default');
 
         v_a = parseFloat($('#vAs').val()) * 5 / 18;
         v_b = parseFloat($('#vBs').val()) * 5 / 18;
@@ -138,12 +138,20 @@ $(document).ready(function () {
             if (xB >= xA) a = predict_accn2(v_a);
 
             if (xB >= xC) {
-                $('input[type=\'button\']').val('B and C collided!').prop('disabled', 'true').css('cursor', 'default');
+                $('form').css('background', '#f004');
+                $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
+                $('input[type=\'button\']').click(function () {
+                    location.reload();
+                });
                 return;
             }
 
             if (xA + lB + sd2 <= xB) {
-                $('input[type=\'button\']').val('Overtook!').prop('disabled', 'true').css('cursor', 'default');
+                $('form').css('background', '#0f04');
+                $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
+                $('input[type=\'button\']').click(function () {
+                    location.reload();
+                });
                 return;
             }
 

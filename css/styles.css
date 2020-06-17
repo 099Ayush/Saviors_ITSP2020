@@ -152,6 +152,10 @@ td {
     font-size: small;
 }
 
+.result {
+    font-size: x-large;
+}
+
 @media only screen and (max-width: 1000px) {
     form {
         width: 100%;
