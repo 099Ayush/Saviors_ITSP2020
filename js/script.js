@@ -10,6 +10,44 @@ w   :   Width of car A.
 D   :   Distance between car A and car C.
 */
 
+function predict_length(width) {
+    if (width <= 2.4) {
+        return 5;
+    } else {
+        return 10;
+    }
+}
+
+function predict_accn1(speed) {
+    switch (true) {
+        case speed < 19.6:
+            return 0.89;
+        case speed < 22.4:
+            return 0.80;
+        case speed < 25.17:
+            return 0.72;
+        default:
+            return 0.73;
+    }
+}
+
+function predict_accn2(speed) {
+    switch (true) {
+        case speed < 22.4:
+            return 0.53;
+        case speed < 25.17:
+            return 0.41;
+        default:
+            return 0.51;
+    }
+}
+
+var v_a, v_b, v_c, w, D, s, lA, xA, xB, xC;
+var a;                       // Acceleration of car B.
+var fr = 120                 // Frame rate (fps).
+var sd2 = 25                 // Safe distance after overtake (m).
+var lB = 5                   // Length of car B (m).
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -37,19 +75,82 @@ $(document).ready(function () {
     $('input[type=\'text\']').on('input', function () {
         update_form_2();
     });
-    setTimeout(function() {
-        $('form').addClass('visible1');
-    }, 100);
-    setTimeout(function() {
-        $('form').addClass('visible2');
-    }, 700);
-    setTimeout(function() {
+    setTimeout(function () {
+        $('form').css('transform', 'scaleX(1) scaleY(0.1)');
+    }, 200);
+    setTimeout(function () {
+        $('form').css('transform', 'scaleX(1) scaleY(1)');
+        $('form').css('border-top', 'solid 1px');
+        $('form').css('border-bottom', 'solid 1px');
+    }, 800);
+    setTimeout(function () {
         $('form table').css('opacity', '1');
-    }, 1100);
+    }, 1200);
 
+    // On submit, disable inputs and store initial measurements.
     $('input[type=\'button\']').click(function () {
         $('input:not([type=\'button\'])').prop('disabled', 'true');
+
+        v_a = parseFloat($('#vAs').val()) * 18 / 5;
+        v_b = parseFloat($('#vBs').val()) * 18 / 5;
+        v_c = - parseFloat($('#vCs').val()) * 18 / 5;
+        a = predict_accn1(v_a);
+
+        w = parseFloat($('#wA').val());
+        D = parseFloat($('#Ds').val());
+        s = parseFloat($('#ss').val());
+        lA = predict_length(w);
+
+        // xI represents the head of the engine bonnet of car I.
+        xA = 0;
+        xB = xA - s - lA;
+        xC = xB + D;
+        
+        play();
     });
+
+    function update_form(fD, fs, fv_b) {
+        $('#Ds').val(fD);
+        $('#ss').val(fs);
+        $('#vAs').val(fv_b * 5 / 18);
+        $('#D').val(parseInt(fD));
+        $('#s').val(parseInt(fs));
+        $('#vA').val(parseInt(fv_b * 5 / 18));
+    }
+
+    /**
+     * Update the position of the cars per frame.
+     */
+    async function play() {
+        while (true) {
+            let duration = 1 / fr;
+            xA += duration * (2 * v_a + a * duration) / 2;
+            xB += duration * v_b;
+            xC += duration * v_c;
+
+            v_b += a * duration;
+
+            console.log(a);
+
+            D = xC - xB;
+            s = (xB <= xA)?(xA - xB - lA):(xB - xA - lB);
+
+            if (xB >= xA) a = predict_accn2(v_a);
+
+            if (xB >= xC) {
+                $('input[type=\'button\']').val('B and C collided!').prop('disabled', 'true').css('cursor', 'default');
+                return;
+            }
+
+            if (xA + lB + sd2 <= xB) {
+                $('input[type=\'button\']').val('Overtook!').prop('disabled', 'true').css('cursor', 'default');
+                return;
+            }
+
+            update_form(D, s, v_a);
+            await sleep(duration * 1000);
+        }
+    }
 });
 
 /**
