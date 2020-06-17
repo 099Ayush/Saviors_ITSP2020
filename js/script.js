@@ -125,13 +125,15 @@ $(document).ready(function () {
     async function play() {
         while (true) {
             let duration = 1 / fr;
-            xB += duration * (2 * v_b + a * duration) / 2;
+
+            vb_old = v_b;
+            v_b += a * duration;
+            if (v_b > 80 * 5 / 18) v_b = 80 * 5 / 18;
+            vb_av = (v_b + vb_old) / 2;
+
+            xB += duration * vb_av;
             xA += duration * v_a;
             xC += duration * v_c;
-
-            v_b += a * duration;
-
-            console.log(a);
 
             D = xC - xB;
             s = (xB <= xA) ? (xA - xB - lA) : (xB - xA - lB);
