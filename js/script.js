@@ -91,9 +91,9 @@ $(document).ready(function () {
     $('input[type=\'button\']').click(function () {
         $('input:not([type=\'button\'])').prop('disabled', 'true');
 
-        v_a = parseFloat($('#vAs').val()) * 18 / 5;
-        v_b = parseFloat($('#vBs').val()) * 18 / 5;
-        v_c = - parseFloat($('#vCs').val()) * 18 / 5;
+        v_a = parseFloat($('#vAs').val()) * 5 / 18;
+        v_b = parseFloat($('#vBs').val()) * 5 / 18;
+        v_c = - parseFloat($('#vCs').val()) * 5 / 18;
         a = predict_accn1(v_a);
 
         w = parseFloat($('#wA').val());
@@ -112,10 +112,10 @@ $(document).ready(function () {
     function update_form(fD, fs, fv_b) {
         $('#Ds').val(fD);
         $('#ss').val(fs);
-        $('#vAs').val(fv_b * 5 / 18);
+        $('#vAs').val(fv_b * 18 / 5);
         $('#D').val(parseInt(fD));
         $('#s').val(parseInt(fs));
-        $('#vA').val(parseInt(fv_b * 5 / 18));
+        $('#vA').val(parseInt(fv_b * 18 / 5));
     }
 
     /**
