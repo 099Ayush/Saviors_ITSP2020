@@ -44,8 +44,8 @@ function predict_accn2(speed) {
 
 var v_a, v_b, v_c, w, D, s, lA, xA, xB, xC;
 var a;                       // Acceleration of car B.
-var fr = 120;
-var sd1 = 5;                 // Frame rate (fps).
+var fr = 120;                // Frame rate (fps).
+var sd1 = 5;
 var sd2 = 25;                 // Safe distance after overtake (m).
 var lB = 5;                   // Length of car B (m).
 
@@ -106,7 +106,7 @@ $(document).ready(function () {
         xA = 0;
         xB = xA - s - lA;
         xC = xB + D;
-        
+
         play();
     });
 
@@ -134,7 +134,7 @@ $(document).ready(function () {
             console.log(a);
 
             D = xC - xB;
-            s = (xB <= xA)?(xA - xB - lA):(xB - xA - lB);
+            s = (xB <= xA) ? (xA - xB - lA) : (xB - xA - lB);
 
             if (xB >= xA) a = predict_accn2(v_a);
 
