@@ -96,10 +96,11 @@ $(document).ready(function () {
         $('form').css('transform', 'scaleX(1) scaleY(1)');
         $('form').css('border-top', 'solid 1px');
         $('form').css('border-bottom', 'solid 1px');
+        $('#top-view').css('transform', 'scaleY(1)');
     }, 800);
     setTimeout(function () {
         $('form table').css('opacity', '1');
-        $('#top-view').css('transform', 'scale(1)');
+        $('img').css('opacity', '1');
     }, 1200);
 
     // On submit, disable inputs and store initial measurements.

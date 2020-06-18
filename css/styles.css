@@ -181,13 +181,15 @@ td {
     margin: 10px auto;
     width: 100%;
     background: linear-gradient(to bottom, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #ffff, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4);
-    transform: scale(0);
+    transform: scaleY(0);
     transition: transform 0.3s;
 }
 
 #top-view img {
     position: absolute;
     height: 2vh;
+    opacity: 0;
+    transition: opacity 0.3s, top 1.5s;
 }
 
 #top-view hr {
@@ -199,8 +201,7 @@ td {
 #carB {
     width: 2.38%;
     left: 0;
-    top: 10%;
-    transition: top 1.5s;
+    top: 33.33%;
 }
 
 #carC {
