@@ -180,7 +180,7 @@ td {
     height: 6vh;
     margin: 10px auto;
     width: 100%;
-    background: linear-gradient(to bottom, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #ffff, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4);
+    background: linear-gradient(to bottom, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #ffff, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4);
     transform: scaleY(0);
     transition: transform 0.3s;
 }
