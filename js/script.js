@@ -69,12 +69,25 @@ $(document).ready(function () {
         $('#Ds').val($('#D').val());
         $('#ss').val($('#s').val());
     }
+    function update_road() {
+        let l = (parseFloat($('#ss').val()) + lB) / (2 * lB + parseFloat($('#Ds').val())) * 100;
+        let zf = (2 * lB + 200) / (2 * lB + parseFloat($('#Ds').val()))
+        w = zf * 2.38;
+        road_width = 6 * zf;
+        car_width = 2 * zf;
+        $('#carA').css('left', l.toString() + '%');
+        $('img').css('width', w.toString() + '%');
+        $('img').css('height', car_width.toString() + 'vh');
+        $('#top-view').css('height', road_width.toString() + 'vh')
+    }
     update_form_1();
     $('input[type=\'range\']').on('input', function () {
         update_form_1();
+        update_road();
     });
     $('input[type=\'text\']').on('input', function () {
         update_form_2();
+        update_road();
     });
     setTimeout(function () {
         $('form').css('transform', 'scaleX(1) scaleY(0.1)');
@@ -86,6 +99,7 @@ $(document).ready(function () {
     }, 800);
     setTimeout(function () {
         $('form table').css('opacity', '1');
+        $('#top-view').css('transform', 'scale(1)');
     }, 1200);
 
     // On submit, disable inputs and store initial measurements.
@@ -103,9 +117,16 @@ $(document).ready(function () {
         lA = predict_length(w);
 
         // xI represents the head of the engine bonnet of car I.
-        xA = 0;
+        xA = lB + s + lA;
         xB = xA - s - lA;
         xC = xB + D;
+
+        xp_rate = 100 / (D + 2 * lB);
+        ax = (xA - lA) * xp_rate;
+        bx = 0;
+        cx = 0;
+
+        $('#carB').css('top', '56.66%');
 
         play();
     });
@@ -123,6 +144,7 @@ $(document).ready(function () {
      * Update the position of the cars per frame.
      */
     async function play() {
+        var bl = 0;
         while (true) {
             let duration = 1 / fr;
 
@@ -132,30 +154,46 @@ $(document).ready(function () {
             vb_av = (v_b + vb_old) / 2;
 
             xB += duration * vb_av;
+            bx += duration * vb_av * xp_rate;
+            $('#carB').css('left', bx.toString() + '%');
             xA += duration * v_a;
+            ax += duration * v_a * xp_rate;
+            $('#carA').css('left', ax.toString() + '%');
             xC += duration * v_c;
+            cx -= duration * v_c * xp_rate;
+            $('#carC').css('right', cx.toString() + '%');
 
             D = xC - xB;
             s = (xB <= xA) ? (xA - xB - lA) : (xB - xA - lB);
 
             if (xB >= xA) a = predict_accn2(v_a);
 
-            if (xB + sd2 >= xC) {
-                $('form').css('background', '#f004');
-                $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
-                $('input[type=\'button\']').click(function () {
-                    location.reload();
-                });
-                return;
+            function ret () {
+                if (xB + sd2 >= xC) {
+                    $('form').css('background', '#f004');
+                    $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
+                    $('input[type=\'button\']').click(function () {
+                        location.reload();
+                    });
+                    bl = 1;
+                    return;
+                }
+    
+                if (xA + lB + sd1 <= xB) {
+                    $('form').css('background', '#0f04');
+                    $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
+                    $('input[type=\'button\']').click(function () {
+                        location.reload();
+                    });
+                    bl = 1;
+                    return;
+                }
             }
 
-            if (xA + lB + sd1 <= xB) {
-                $('form').css('background', '#0f04');
-                $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
-                $('input[type=\'button\']').click(function () {
-                    location.reload();
-                });
-                return;
+            if (bl === 0) ret();
+
+            if (xA <= xB - lB) {
+                $('#carB').css('top', '10%');
             }
 
             update_form(D, s, v_b);
@@ -163,14 +201,3 @@ $(document).ready(function () {
         }
     }
 });
-
-/**
- * Creates a prediction model with specified hyperparameter of safe distance.
- * @param   {number}    s   The safe distance maintained between cars A and B in acc. overtake.
- * @returns {Object}        The prediction model.
- */
-function Model(s) {
-    const model = {};
-    model.s = s;
-    return model;
-}

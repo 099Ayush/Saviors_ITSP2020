@@ -15,7 +15,7 @@
 
 html, body {
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .main {
     height: 100%;
@@ -40,7 +40,6 @@ form {
     border: solid 10px;
     border-left: none;
     border-right: none;
-    overflow: hidden;
     transition: 0.3s;
     padding: 0 10%;
     padding-bottom: 20px;
@@ -174,6 +173,47 @@ td {
         width: 100%;
         transition: 0.2s;
     }
+}
+
+#top-view {
+    position: relative;
+    height: 6vh;
+    margin: 10px auto;
+    width: 100%;
+    background: linear-gradient(to bottom, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #ffff, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4);
+    transform: scale(0);
+    transition: transform 0.3s;
+}
+
+#top-view img {
+    position: absolute;
+    height: 2vh;
+}
+
+#top-view hr {
+    height: 0px;
+    vertical-align: middle;
+    width: 100%;
+}
+
+#carB {
+    width: 2.38%;
+    left: 0;
+    top: 10%;
+    transition: top 1.5s;
+}
+
+#carC {
+    width: 2.38%;
+    right: 0;
+    bottom: 10%;
+    transform: scaleX(-1);
+}
+
+#carA {
+    width: 2.38%;
+    left: 4.76%;
+    top: 10%;
 }
 
 @media only screen and (min-width: 1000px) {
