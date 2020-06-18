@@ -177,17 +177,20 @@ td {
 
 #top-view {
     position: relative;
-    height: 6vh;
-    margin: 10px auto;
+    height: 2.86vw;
+    margin: 30px auto;
     width: 100%;
-    background: linear-gradient(to bottom, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #ffff, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4, #fff4);
+    border: 1px solid #fff;
+    border-left: none;
+    border-right: none;
+    background: linear-gradient(to bottom, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #ffff, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2, #fff2);
     transform: scaleY(0);
     transition: transform 0.3s;
 }
 
 #top-view img {
     position: absolute;
-    height: 2vh;
+    height: 0.95vw;
     opacity: 0;
     transition: opacity 0.3s, top 1.5s;
 }

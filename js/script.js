@@ -73,12 +73,12 @@ $(document).ready(function () {
         let l = (parseFloat($('#ss').val()) + lB) / (2 * lB + parseFloat($('#Ds').val())) * 100;
         let zf = (2 * lB + 200) / (2 * lB + parseFloat($('#Ds').val()))
         w = zf * 2.38;
-        road_width = 6 * zf;
-        car_width = 2 * zf;
+        road_width = 2.86 * zf;
+        car_width = 0.95 * zf;
         $('#carA').css('left', l.toString() + '%');
         $('img').css('width', w.toString() + '%');
-        $('img').css('height', car_width.toString() + 'vh');
-        $('#top-view').css('height', road_width.toString() + 'vh')
+        $('img').css('height', car_width.toString() + 'vw');
+        $('#top-view').css('height', road_width.toString() + 'vw')
     }
     update_form_1();
     $('input[type=\'range\']').on('input', function () {
@@ -170,13 +170,18 @@ $(document).ready(function () {
             if (xB >= xA) a = predict_accn2(v_a);
 
             function ret () {
+                if (xB >= xC) {
+                    bl = 2;
+                    return;
+                }
+
                 if (xB + sd2 >= xC) {
                     $('form').css('background', '#f004');
                     $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
                     $('input[type=\'button\']').click(function () {
                         location.reload();
                     });
-                    bl = 1;
+                    bl = 0;
                     return;
                 }
     
@@ -192,6 +197,7 @@ $(document).ready(function () {
             }
 
             if (bl === 0) ret();
+            else if (bl === 2) return;
 
             if (xA <= xB - lB) {
                 $('#carB').css('top', '10%');
