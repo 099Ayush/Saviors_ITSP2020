@@ -136,8 +136,8 @@ $(document).ready(function () {
         $('#Ds').val(fD);
         $('#ss').val(fs);
         $('#vBs').val(fv_b * 18 / 5);
-        $('#D').val(parseInt(fD));
-        $('#s').val(parseInt(fs));
+        $('#D').val(Math.max(parseInt(fD), 0));
+        $('#s').val(Math.max(parseInt(fs), 0));
         $('#vB').val(parseInt(fv_b * 18 / 5));
     }
 
@@ -164,7 +164,7 @@ $(document).ready(function () {
             cx -= duration * v_c * xp_rate;
             $('#carC').css('right', cx.toString() + '%');
 
-            D = xC - xB;
+            D = (xC >= xB) ? (xC - xB) : (xB - xC - 2 * lB);
             s = (xB <= xA) ? (xA - xB - lA) : (xB - xA - lB);
 
             if (xB >= xA) a = predict_accn2(v_a);
