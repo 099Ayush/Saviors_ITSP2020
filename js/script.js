@@ -20,25 +20,31 @@ function predict_length(width) {
 
 function predict_accn1(speed) {
     switch (true) {
-        case speed < 19.6:
-            return 0.89;
-        case speed < 22.4:
-            return 0.80;
-        case speed < 25.17:
-            return 0.72;
-        default:
-            return 0.73;
+        case speed < 50 * 5 / 18:
+            return 2.42 * 5 / 18;
+        case speed < 60 * 5 / 18:
+            return 5.15 * 5 / 18;
+        case speed < 70 * 5 / 18:
+            return 5.15 * 5 / 18;
+        case speed < 80 * 5 / 18:
+            return 5.37 * 5 / 18;
+        case speed < 90 * 5 / 18:
+            return 3.03 * 5 / 18;
     }
 }
 
 function predict_accn2(speed) {
     switch (true) {
-        case speed < 22.4:
-            return 0.53;
-        case speed < 25.17:
-            return 0.41;
-        default:
-            return 0.51;
+        case speed < 50 * 5 / 18:
+            return 3.35 * 5 / 18;
+        case speed < 60 * 5 / 18:
+            return 3.95 * 5 / 18;
+        case speed < 70 * 5 / 18:
+            return 3.87 * 5 / 18;
+        case speed < 80 * 5 / 18:
+            return 3.23 * 5 / 18;
+        case speed < 90 * 5 / 18:
+            return 2.78 * 5 / 18;
     }
 }
 
@@ -48,10 +54,6 @@ var fr = 120;                // Frame rate (fps).
 var sd1 = 5;
 var sd2 = 25;                 // Safe distance after overtake (m).
 var lB = 5;                   // Length of car B (m).
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 // Snippet to update text fields by sliders, and vice versa.
 $(document).ready(function () {
@@ -78,7 +80,7 @@ $(document).ready(function () {
         $('#carA').css('left', l.toString() + '%');
         $('img').css('width', w.toString() + '%');
         $('img').css('height', car_width.toString() + 'vw');
-        $('#top-view').css('height', road_width.toString() + 'vw')
+        $('#top-view').css('height', road_width.toString() + 'vw');
     }
     update_form_1();
     $('input[type=\'range\']').on('input', function () {
@@ -144,14 +146,21 @@ $(document).ready(function () {
     /**
      * Update the position of the cars per frame.
      */
-    async function play() {
+    function play() {
         var bl = 0;
-        while (true) {
-            let duration = 1 / fr;
+        var ot = 0;
+        if (v_b >= v_a + 10 * 5 / 18) {
+            ot = 1;
+            a = 0;
+        }
+        let t0 = $.now();
+        setInterval(function () {
+            t1 = $.now();
+            let duration = (t1 - t0) / 1000;
 
             vb_old = v_b;
             v_b += a * duration;
-            if (v_b > 80 * 5 / 18) v_b = 80 * 5 / 18;
+            if (v_b > 90 * 5 / 18) v_b = 90 * 5 / 18;
             vb_av = (v_b + vb_old) / 2;
 
             xB += duration * vb_av;
@@ -164,12 +173,14 @@ $(document).ready(function () {
             cx -= duration * v_c * xp_rate;
             $('#carC').css('right', cx.toString() + '%');
 
+            t0 = $.now();
+
             D = (xC >= xB) ? (xC - xB) : (xB - xC - 2 * lB);
             s = (xB <= xA) ? (xA - xB - lA) : (xB - xA - lB);
 
-            if (xB >= xA) a = predict_accn2(v_a);
+            if (xB >= xA + lB && ot === 0) a = predict_accn2(v_a);
 
-            function ret () {
+            function ret() {
                 if (xB >= xC) {
                     bl = 2;
                     return;
@@ -184,7 +195,7 @@ $(document).ready(function () {
                     bl = 0;
                     return;
                 }
-    
+
                 if (xA + lB + sd1 <= xB) {
                     $('form').css('background', '#0f04');
                     $('input[type=\'button\']').val('Reset').removeAttr('disabled').css('cursor', 'pointer');
@@ -204,7 +215,6 @@ $(document).ready(function () {
             }
 
             update_form(D, s, v_b);
-            await sleep(duration * 1000);
-        }
+        }, 1000 / fr);
     }
 });
