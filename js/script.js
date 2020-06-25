@@ -52,7 +52,7 @@ var v_a, v_b, v_c, w, D, s, lA, xA, xB, xC;
 var a;                       // Acceleration of car B.
 var fr = 120;                // Frame rate (fps).
 var sd1 = 5;
-var sd2 = 25;                 // Safe distance after overtake (m).
+var sd2 = 10;                 // Safe distance after overtake (m).
 var lB = 5;                   // Length of car B (m).
 
 // Snippet to update text fields by sliders, and vice versa.
