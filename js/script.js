@@ -134,13 +134,14 @@ $(document).ready(function () {
         play();
     });
 
-    function update_form(fD, fs, fv_b) {
+    function update_form(fD, fs, fv_b, t) {
         $('#Ds').val(fD);
         $('#ss').val(fs);
         $('#vBs').val(fv_b * 18 / 5);
         $('#D').val(Math.max(parseInt(fD), 0));
         $('#s').val(Math.max(parseInt(fs), 0));
         $('#vB').val(parseInt(fv_b * 18 / 5));
+        $('#stopwatch').html(t.toFixed(3));
     }
 
     /**
@@ -153,7 +154,7 @@ $(document).ready(function () {
             ot = 1;
             a = 0;
         }
-        let t0 = $.now();
+        let t0 = $.now(), t00 = $.now(), tf, tf_done = false;
         setInterval(function () {
             t1 = $.now();
             let duration = (t1 - t0) / 1000;
@@ -210,11 +211,21 @@ $(document).ready(function () {
             if (bl === 0) ret();
             else if (bl === 2) return;
 
+            let tn = $.now() - t00;
+
             if (xA <= xB - lB) {
                 $('#carB').css('top', '10%');
+                if (!tf_done) {
+                    tf = tn + 1500;
+                    tf_done = true;
+                }
             }
 
-            update_form(D, s, v_b);
+            if (tf_done) {
+                tn = Math.min(tf, tn);
+            }
+
+            update_form(D, s, v_b, tn / 1000);
         }, 1000 / fr);
     }
 });
