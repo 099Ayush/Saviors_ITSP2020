@@ -91,6 +91,11 @@ $(document).ready(function () {
         update_form_2();
         update_road();
     });
+    $('input[type=\'text\']').change(function () {
+        update_form_2();
+        update_form_1();
+        update_road();
+    });
     setTimeout(function () {
         $('form').css('transform', 'scaleX(1) scaleY(0.1)');
     }, 200);
