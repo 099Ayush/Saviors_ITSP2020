@@ -141,7 +141,7 @@ $(document).ready(function () {
         $('#D').val(Math.max(parseInt(fD), 0));
         $('#s').val(Math.max(parseInt(fs), 0));
         $('#vB').val(parseInt(fv_b * 18 / 5));
-        $('#stopwatch').html(t.toFixed(3));
+        $('#stopwatch').html(t.toFixed(3).toString() + 's');
     }
 
     /**
