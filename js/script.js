@@ -28,7 +28,7 @@ function predict_accn1(speed) {
             return 5.15 * 5 / 18;
         case speed < 80 * 5 / 18:
             return 5.37 * 5 / 18;
-        case speed < 90 * 5 / 18:
+        case speed <= 90 * 5 / 18:
             return 3.03 * 5 / 18;
     }
 }
@@ -130,7 +130,7 @@ $(document).ready(function () {
         cx = 0;
 
         $('#carB').css('top', '56.66%');
-
+        update_form_1();
         play();
     });
 
@@ -155,7 +155,7 @@ $(document).ready(function () {
             a = 0;
         }
         let t0 = $.now(), t00 = $.now(), tf, tf_done = false;
-        setInterval(function () {
+        const interval = setInterval(function () {
             t1 = $.now();
             let duration = (t1 - t0) / 1000;
 
@@ -209,7 +209,11 @@ $(document).ready(function () {
             }
 
             if (bl === 0) ret();
-            else if (bl === 2) return;
+            else if (bl === 2) {
+                clearInterval(interval);
+                $('#carB').css('top', $('#carB').css('top'));
+                return;
+            };
 
             let tn = $.now() - t00;
 
